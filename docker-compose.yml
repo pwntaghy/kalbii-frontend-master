@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build: .
+    image: kalbii-frontend
+    container_name: kalbii-frontend
+    ports:
+      - "8081:80"   # 🔥 8080 → 8081
+    restart: unless-stopped
+
