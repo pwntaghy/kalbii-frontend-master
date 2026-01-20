@@ -1,10 +1,10 @@
 const navItems = [
     { label: "cloud", path: "/" },
-    { label: "devops", path: "/about" },
+    { label: "devops", path: "/" },
     // {label:"Portfolio",path:"/portfolio"},
     // {label:"Blogs",path:"/blogs"},
-    { label: "aws", path: "/career" },
-    { label: "Contact", path: "/contact" },
+    { label: "hi", path: "/" },
+    { label: "kalbi", path: "/contact" },
     // {label:"Login",path:"/login"},
     // {label:"Register",path:"/signup"}
 ]
