@@ -2,8 +2,7 @@ name: Auto Deploy Frontend (Production)
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   deploy:
@@ -20,20 +19,9 @@ jobs:
           request_pty: true
           script: |
             set -eux
-
-            echo "=== CONNECTED TO SERVER ==="
-            whoami
-            pwd
-
             cd /home/kalbi/kalbii-frontend-master
-
-            echo "=== GIT UPDATE ==="
             git fetch origin
             git reset --hard origin/main
-
-            echo "=== DOCKER DEPLOY ==="
             /usr/bin/docker-compose down
             /usr/bin/docker-compose build --no-cache
             /usr/bin/docker-compose up -d
-
-            echo "=== DEPLOY COMPLETED ==="
