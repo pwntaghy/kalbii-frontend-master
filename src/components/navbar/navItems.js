@@ -1,6 +1,6 @@
 const navItems = [
     { label: "nitin", path: "/" },
-    { label: "cloud", path: "/" },
+    { label: "thakurd", path: "/" },
     // {label:"Portfolio",path:"/portfolio"},
     // {label:"Blogs",path:"/blogs"},
     { label: "aws", path: "/" },
