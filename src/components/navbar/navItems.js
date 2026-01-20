@@ -1,5 +1,5 @@
 const navItems = [
-    { label: "Home", path: "/" },
+    { label: "cloud", path: "/" },
     { label: "About", path: "/about" },
     // {label:"Portfolio",path:"/portfolio"},
     // {label:"Blogs",path:"/blogs"},
