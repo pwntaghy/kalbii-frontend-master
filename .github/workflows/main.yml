@@ -2,7 +2,8 @@ name: Auto Deploy Frontend (Production)
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -11,24 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install cloudflared
-        run: |
-          curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
-          chmod +x cloudflared
-          sudo mv cloudflared /usr/local/bin/
-
-      - name: Deploy via Cloudflare SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-
-          cloudflared access ssh --hostname kalbii.net << 'EOF'
-          cd ~/kalbii-frontend-master
-          git pull origin main
-          docker compose down
-          docker compose build --no-cache
-          docker compose up -d
-          EOF
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd ~/kalbii-frontend-master
+            git pull origin main
+            docker compose down
+            docker compose build --no-cache
+            docker compose up -d
