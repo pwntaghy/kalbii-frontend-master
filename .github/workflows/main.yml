@@ -1,26 +1,14 @@
-name: Auto Deploy Frontend (Production)
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    name: Deploy to Production Server
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd kalbii-frontend
-            git pull origin main
-            docker-compose up -d --build
+- name: Deploy to Production Server
+  uses: appleboy/ssh-action@v1.0.3
+  with:
+    host: ${{ secrets.SERVER_HOST }}
+    username: ${{ secrets.SERVER_USER }}
+    key: ${{ secrets.SSH_PRIVATE_KEY }}
+    script: |
+      echo "SSH CONNECTED"
+      whoami
+      pwd
+      ls
+      cd kalbii-frontend-master
+      git pull origin main
+      docker-compose up -d --build
